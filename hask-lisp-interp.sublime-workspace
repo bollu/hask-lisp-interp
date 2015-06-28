@@ -1,0 +1,940 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ad",
+				"advanceCursor_"
+			],
+			[
+				"adv",
+				"advanceCursor"
+			],
+			[
+				"opera",
+				"operands"
+			],
+			[
+				"Op",
+				"operator"
+			],
+			[
+				"cursor",
+				"Cursor"
+			],
+			[
+				"Curs",
+				"Cursor"
+			],
+			[
+				"Tok",
+				"TokenizerCursor"
+			],
+			[
+				"Token",
+				"TokenIdentifier"
+			],
+			[
+				"takeW",
+				"takeWhile"
+			],
+			[
+				"gly",
+				"glyphList"
+			],
+			[
+				"gl",
+				"glyphList"
+			],
+			[
+				"is",
+				"isGlyph"
+			],
+			[
+				"Tokeni",
+				"TokenizerCursor"
+			],
+			[
+				"bord",
+				"border_color"
+			],
+			[
+				"rot",
+				"rotation	statement"
+			],
+			[
+				"take",
+				"takeFromCursor"
+			],
+			[
+				"tak",
+				"takeFromCursor"
+			],
+			[
+				"trans",
+				"transforms	function"
+			],
+			[
+				"shr",
+				"shared_program	function"
+			],
+			[
+				"phong_",
+				"phong_vertex	statement"
+			],
+			[
+				"sha",
+				"shared_program	function"
+			],
+			[
+				"specu",
+				"specular_factor"
+			],
+			[
+				"sh",
+				"shared_program	function"
+			],
+			[
+				"doc_",
+				"doc_shifted_pos1"
+			],
+			[
+				"phong",
+				"phong_fragment	statement"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/main.hs",
+			"settings":
+			{
+				"buffer_size": 4331,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "ena",
+		"selected_items":
+		[
+			[
+				"ena",
+				"Package Control: Enable Package"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"packa ena",
+				"Package Control: Enable Package"
+			],
+			[
+				"to spaces",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"block",
+				"Toggle Block Comment"
+			],
+			[
+				"blo",
+				"Toggle Block Comment"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"kebin",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"blc",
+				"Toggle Block Comment"
+			],
+			[
+				"toggle sta",
+				"View: Toggle Status Bar"
+			],
+			[
+				"anacon",
+				"Anaconda: Next lint error"
+			],
+			[
+				"toggle ta",
+				"View: Toggle Tabs"
+			],
+			[
+				"toggle me",
+				"View: Toggle Menu"
+			],
+			[
+				"keybin",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"isnta",
+				"Package Control: Install Package"
+			],
+			[
+				"toggle sid",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"settings ",
+				"Preferences: Settings - User"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 167.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": false,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": true,
+		"side_bar_visible": true,
+		"status_bar_visible": true
+	},
+	"expanded_folders":
+	[
+		"/home/bollu/prog/hask-lisp-interp"
+	],
+	"file_history":
+	[
+		"/home/bollu/prog/hask-lisp-interp/src/main.hs",
+		"/home/bollu/prog/cpp-achilles/src/tokenizer.cpp",
+		"/home/bollu/prog/hask-lisp-interp/makefile",
+		"/home/bollu/prog/vispy/vispy/visuals/mesh.py",
+		"/home/bollu/prog/vispy/vispy/visuals/line_plot.py",
+		"/home/bollu/prog/vispy/examples/basics/visuals/line.py",
+		"/home/bollu/prog/vispy/vispy/visuals/polygon.py",
+		"/home/bollu/prog/vispy/vispy/visuals/line/line.py",
+		"/home/bollu/prog/vispy/vispy/visuals/visual.py",
+		"/home/bollu/prog/vispy/vispy/visuals/cube.py",
+		"/home/bollu/prog/vispy/vispy/visuals/ellipse.py",
+		"/home/bollu/prog/vispy/vispy/visuals/box.py",
+		"/home/bollu/prog/vispy/vispy/visuals/rectangle.py",
+		"/home/bollu/prog/vispy/examples/basics/visuals/line_prototype.py",
+		"/home/bollu/prog/vispy/examples/basics/visuals/line_plot_axes.py",
+		"/home/bollu/prog/vispy/vispy/visuals/__init__.py",
+		"/home/bollu/prog/vispy/vispy/visuals/markers.py",
+		"/home/bollu/prog/vispy/examples/basics/visuals/polygon_visual.py",
+		"/home/bollu/prog/vispy/vispy/visuals/tests/test_regular_polygon.py",
+		"/home/bollu/prog/vispy/vispy/visuals/regular_polygon.py",
+		"/home/bollu/prog/vispy.js/scripts/vispy.js",
+		"/home/bollu/prog/vispy.js/scripts/gloo.glir.js",
+		"/home/bollu/prog/vispy/examples/basics/visuals/cube.py",
+		"/home/bollu/prog/vispy/examples/basics/visuals/dynamic_polygon.py",
+		"/home/bollu/prog/vispy/examples/basics/visuals/box.py",
+		"/home/bollu/prog/vispy/examples/basics/visuals/mesh.py",
+		"/home/bollu/prog/vispy.js/scripts/data.js",
+		"/home/bollu/prog/vispy.js/scripts/events.js",
+		"/home/bollu/prog/vispy.js/scripts/vispycanvas.js",
+		"/home/bollu/prog/vispy.js/scripts/util.js",
+		"/home/bollu/prog/vispy.js/scripts/gloo.js",
+		"/home/bollu/prog/vispy.js/dist/vispy.js",
+		"/home/bollu/prog/vispy.js/examples/display_points.json",
+		"/home/bollu/prog/vispy/examples/basics/visuals/__init__.py",
+		"/home/bollu/build/haskell-stack-git/patch",
+		"/home/bollu/prog/vispy/examples/basics/scene/cube.py",
+		"/home/bollu/prog/hask-lisp-interp/main.hs",
+		"/home/bollu/.xmonad/xmonad.hs",
+		"/home/bollu/prog/vispy/vispy/geometry/polygon.py",
+		"/home/bollu/tmp/vispy-scenegraph-bugs.md",
+		"/home/bollu/tmp/vispy-scenegraph-bugs",
+		"/home/bollu/prog/vispy/examples/basics/visuals/image_transforms.py",
+		"/home/bollu/prog/vispy/vispy/gloo/wrappers.py",
+		"/home/bollu/prog/vispy/vispy/scene/widgets/viewbox.py",
+		"/home/bollu/prog/vispy/vispy/scene/widgets/widget.py",
+		"/home/bollu/.config/sublime-text-3/Packages/Anaconda/Default (Linux).sublime-keymap",
+		"/home/bollu/prog/vispy/examples/basics/scene/isocurve.py",
+		"/home/bollu/prog/vispy/examples/tutorial/gloo/lighted_cube.py",
+		"/home/bollu/prog/vispy/examples/basics/gloo/rotate_cube.py",
+		"/home/bollu/prog/vispy/vispy/visuals/transforms/linear.py",
+		"/home/bollu/prog/vispy/vispy/scene/cameras/__init__.py",
+		"/home/bollu/prog/vispy/vispy/geometry/generation.py",
+		"/home/bollu/prog/vispy/vispy/geometry/meshdata.py",
+		"/home/bollu/prog/vispy/vispy/scene/cameras/turntable.py",
+		"/home/bollu/prog/vispy/examples/basics/scene/grid.py",
+		"/home/bollu/prog/vispy/vispy/scene/cameras/panzoom.py",
+		"/home/bollu/prog/vispy/examples/basics/scene/polygon.py",
+		"/home/bollu/prog/vispy/vispy/scene/node.py",
+		"/home/bollu/prog/vispy/examples/tutorial/gl/cube.py",
+		"/home/bollu/prog/vispy/vispy/visuals/volume.py",
+		"/home/bollu/prog/vispy/vispy/visuals/transforms/transform_system.py",
+		"/home/bollu/prog/vispy/vispy/visuals/transforms/chain.py",
+		"/home/bollu/prog/vispy/examples/basics/visuals/rescalingmarkers.py",
+		"/home/bollu/prog/vispy/vispy/scene/visuals.py",
+		"/home/bollu/prog/vispy/vispy/visuals/shaders/variable.py",
+		"/home/bollu/prog/vispy/examples/tutorial/visuals/T02_measurements.py",
+		"/home/bollu/prog/vispy/examples/tutorial/visuals/T01_basic_visual.py",
+		"/home/bollu/gitignore-global",
+		"/home/bollu/prog/vispy/vispy/visuals/isocurve.py",
+		"/home/bollu/prog/vispy/vispy/geometry/isocurve.py",
+		"/home/bollu/prog/vispy/vispy/visuals/plane.py",
+		"/home/bollu/prog/vispy/vispy/testing/_runners.py",
+		"/home/bollu/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/bollu/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/bollu/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/bollu/.config/sublime-text-3/Packages/User/Distraction Free.sublime-settings",
+		"/home/bollu/dotfiles/symlink_to_dotfiles.py",
+		"/home/bollu/prog/vispy/doc/ext/examplesgenerator.py",
+		"/home/bollu/.vimrc",
+		"/home/bollu/prog/vispy/.travis.yml",
+		"/home/bollu/.config/sublime-text-3/Packages/AdvancedNewFile/Default (Linux).sublime-keymap",
+		"/home/bollu/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 96.0,
+		"where_history":
+		[
+			"*.py",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"takeCursorWhile",
+			"advanceCursor",
+			"takeCursorWhile",
+			"takeFromCursor",
+			"advanceCursor",
+			"sTokenizer",
+			"sParser",
+			"parseAtom",
+			"runParser",
+			"runTokenizer",
+			"parse",
+			"peekCursor",
+			"Cursor i",
+			"TokenizerCursor",
+			"parse",
+			"peekParser",
+			"TokenizerCursor",
+			"runCursor",
+			"acceptorFn",
+			"input",
+			"peekCursor",
+			"isGlyph",
+			"genericGlyphStr",
+			"glyphList",
+			"genericGlyphStr",
+			"isGlyph",
+			"getAssociatedGlyph",
+			"sigil_map",
+			"TokenPlus",
+			"constructGlyph",
+			"tokenize",
+			"runTokenizer",
+			"takeWhitespace",
+			"runTokenizer",
+			"TokenCreator",
+			"getChar",
+			"takeFromCursor",
+			"TokenPlus",
+			"tokenFn",
+			"takingFn",
+			"lines",
+			"_draw_mode",
+			"mode",
+			"draw",
+			"CompoundVisual",
+			"_update",
+			"_updaate",
+			"border_color",
+			"self.border",
+			"gl_state = ",
+			"gl_state",
+			"set_gl_state",
+			"gl_state",
+			"_vshare",
+			"border_width=5",
+			"_border_width",
+			"border_width=1",
+			"border",
+			"periodicity",
+			"Eric89GXL",
+			"bollu",
+			"Eric89GXL",
+			"event_tick",
+			"c",
+			"parse_enum",
+			"100",
+			"rotation",
+			"cube_transform",
+			"2",
+			"create_box",
+			"10",
+			"depth_test",
+			"depth",
+			"gl_state",
+			"cull",
+			"culling",
+			"polygon_offset_fill",
+			"polygon",
+			"runTokenizerCursor",
+			"@mesh.setter",
+			"mesh",
+			"draw",
+			"CompoundVisual",
+			"_phong",
+			"doc_tr",
+			"self.rotation",
+			"s",
+			"200",
+			"4",
+			"30",
+			"box",
+			".configure",
+			"translucent",
+			"padding",
+			"'translucent'",
+			"(polygon_offset_fill",
+			"polygon_fill",
+			"polygon_fill_state",
+			"set_gl_state",
+			"_set_gl_state",
+			"<<<<<<< HEAD",
+			"HEAD",
+			"he",
+			"HEAD",
+			"polygon_offset_fill",
+			"set_gl_state",
+			"set_state",
+			"polygon_offset",
+			"_outline",
+			"MeshVisual",
+			"5",
+			"cube",
+			"cube_transform",
+			"self",
+			"_outline",
+			"face_colors",
+			"vertex_colors",
+			"0.2",
+			"AffineTransform",
+			"v",
+			".transfor",
+			"#",
+			"##",
+			"        ##",
+			"RegularPolygon",
+			"_mesh",
+			"_outline",
+			"PolygonVisual"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/main.hs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4331,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3480,
+								3480
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Haskell/Haskell.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2077.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 37.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "hask-lisp-interp.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"main",
+				"src/main.hs"
+			],
+			[
+				"",
+				"src/main.hs"
+			],
+			[
+				"make",
+				"makefile"
+			],
+			[
+				"line",
+				"vispy/visuals/line/line.py"
+			],
+			[
+				"polyg",
+				"vispy/visuals/polygon.py"
+			],
+			[
+				"cube",
+				"vispy/visuals/cube.py"
+			],
+			[
+				"box",
+				"vispy/visuals/box.py"
+			],
+			[
+				"dya",
+				"examples/basics/visuals/dynamic_polygon.py"
+			],
+			[
+				"line_pro",
+				"examples/basics/visuals/line_prototype.py"
+			],
+			[
+				"poly",
+				"vispy/visuals/polygon.py"
+			],
+			[
+				"ellipse",
+				"vispy/visuals/ellipse.py"
+			],
+			[
+				"rectang",
+				"vispy/visuals/rectangle.py"
+			],
+			[
+				"polygon",
+				"vispy/visuals/polygon.py"
+			],
+			[
+				"vispy/visuals/vis",
+				"vispy/visuals/visual.py"
+			],
+			[
+				"lineplo",
+				"vispy/visuals/line_plot.py"
+			],
+			[
+				"visual/visu",
+				"vispy/visuals/visual.py"
+			],
+			[
+				"line_plot_ax",
+				"examples/basics/visuals/line_plot_axes.py"
+			],
+			[
+				"visuals/__ini",
+				"vispy/visuals/__init__.py"
+			],
+			[
+				"mark",
+				"vispy/visuals/markers.py"
+			],
+			[
+				"polygon_vi",
+				"examples/basics/visuals/polygon_visual.py"
+			],
+			[
+				"regular",
+				"vispy/visuals/regular_polygon.py"
+			],
+			[
+				"reguar",
+				"vispy/visuals/regular_polygon.py"
+			],
+			[
+				"rectangle",
+				"vispy/visuals/rectangle.py"
+			],
+			[
+				"elipse",
+				"vispy/visuals/ellipse.py"
+			],
+			[
+				"polygon_viu",
+				"examples/basics/visuals/polygon_visual.py"
+			],
+			[
+				"pol",
+				"vispy/visuals/polygon.py"
+			],
+			[
+				"dynami",
+				"examples/basics/visuals/dynamic_polygon.py"
+			],
+			[
+				"bo.",
+				"vispy/visuals/box.py"
+			],
+			[
+				"regula",
+				"vispy/visuals/regular_polygon.py"
+			],
+			[
+				"scene/cube",
+				"examples/basics/scene/cube.py"
+			],
+			[
+				"examples/box",
+				"examples/basics/visuals/box.py"
+			],
+			[
+				"vispy/visuals/box",
+				"vispy/visuals/box.py"
+			],
+			[
+				"exampes/mesh",
+				"examples/basics/visuals/mesh.py"
+			],
+			[
+				"meh",
+				"vispy/visuals/mesh.py"
+			],
+			[
+				"cube.",
+				"vispy/visuals/cube.py"
+			],
+			[
+				"visuals/cube",
+				"examples/basics/visuals/cube.py"
+			],
+			[
+				"visuals/visual",
+				"vispy/visuals/visual.py"
+			],
+			[
+				"mesh",
+				"vispy/visuals/mesh.py"
+			],
+			[
+				"markers",
+				"vispy/visuals/markers.py"
+			],
+			[
+				"examples/basics/visuals/box",
+				"examples/basics/visuals/box.py"
+			],
+			[
+				"examples/basics/visuals/cub",
+				"examples/basics/visuals/cube.py"
+			],
+			[
+				"cu",
+				"vispy/visuals/cube.py"
+			],
+			[
+				"box.",
+				"examples/basics/visuals/box.py"
+			],
+			[
+				"visuals/mesh",
+				"examples/basics/visuals/mesh.py"
+			],
+			[
+				"mesh.p",
+				"vispy/visuals/mesh.py"
+			],
+			[
+				"examples/basics/scene/cube",
+				"examples/basics/scene/cube.py"
+			],
+			[
+				"examples/polygon",
+				"examples/basics/visuals/polygon_visual.py"
+			],
+			[
+				"examples/basic/visuals/pol",
+				"examples/basics/visuals/polygon_visual.py"
+			],
+			[
+				"visuals/poly",
+				"vispy/visuals/polygon.py"
+			],
+			[
+				"mes",
+				"vispy/visuals/mesh.py"
+			],
+			[
+				"scene/cuv",
+				"examples/basics/scene/isocurve.py"
+			],
+			[
+				"ellip",
+				"vispy/visuals/ellipse.py"
+			],
+			[
+				"cubep",
+				"vispy/visuals/cube.py"
+			],
+			[
+				"examples/basics/mes",
+				"examples/basics/visuals/mesh.py"
+			],
+			[
+				"examples/scene/",
+				"examples/basics/scene/grid.py"
+			],
+			[
+				"scene/",
+				"vispy/scene/node.py"
+			],
+			[
+				"examples/mesh",
+				"examples/basics/visuals/mesh.py"
+			],
+			[
+				"scene/pol",
+				"examples/basics/scene/polygon.py"
+			],
+			[
+				"visuals/cu",
+				"vispy/visuals/cube.py"
+			],
+			[
+				"polygon_v",
+				"examples/basics/visuals/polygon_visual.py"
+			],
+			[
+				"examples/cube",
+				"examples/basics/visuals/cube.py"
+			],
+			[
+				"visuals/cue",
+				"vispy/visuals/cube.py"
+			],
+			[
+				"polygon_vis",
+				"examples/basics/visuals/polygon_visual.py"
+			],
+			[
+				"cub",
+				"examples/basics/visuals/cube.py"
+			],
+			[
+				"exam/mesh",
+				"examples/basics/visuals/mesh.py"
+			],
+			[
+				"examplesmesh",
+				"examples/basics/visuals/mesh.py"
+			],
+			[
+				"mesh.",
+				"vispy/visuals/mesh.py"
+			],
+			[
+				"visuals/__init",
+				"vispy/visuals/__init__.py"
+			],
+			[
+				"volume",
+				"vispy/visuals/volume.py"
+			],
+			[
+				"marker",
+				"vispy/visuals/markers.py"
+			],
+			[
+				"resca",
+				"examples/basics/visuals/rescalingmarkers.py"
+			],
+			[
+				"el",
+				"vispy/visuals/ellipse.py"
+			],
+			[
+				"examples/visuals/pol",
+				"examples/basics/visuals/polygon_visual.py"
+			],
+			[
+				"t02",
+				"examples/tutorial/visuals/T02_measurements.py"
+			],
+			[
+				"t01",
+				"examples/tutorial/visuals/T01_basic_visual.py"
+			],
+			[
+				"recta",
+				"vispy/visuals/rectangle.py"
+			],
+			[
+				"polygn",
+				"vispy/visuals/polygon.py"
+			],
+			[
+				"isocu",
+				"vispy/visuals/isocurve.py"
+			],
+			[
+				"isocur",
+				"vispy/geometry/isocurve.py"
+			],
+			[
+				"plane",
+				"vispy/visuals/plane.py"
+			],
+			[
+				"rectan",
+				"vispy/visuals/rectangle.py"
+			],
+			[
+				"polyon",
+				"vispy/visuals/polygon.py"
+			],
+			[
+				"_runn",
+				"vispy/testing/_runners.py"
+			],
+			[
+				"exam",
+				"doc/ext/examplesgenerator.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/subl-projects/vispy.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 265.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
