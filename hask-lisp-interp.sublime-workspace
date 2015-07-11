@@ -4,6 +4,58 @@
 		"selected_items":
 		[
 			[
+				"Tokeni",
+				"TokenizerCursor"
+			],
+			[
+				"tokeni",
+				"tokenizerAccum"
+			],
+			[
+				"tokenizerTa",
+				"tokenizerTakeWhile"
+			],
+			[
+				"_tokeni",
+				"_tokenizerTakeWhile"
+			],
+			[
+				"Token",
+				"Token"
+			],
+			[
+				"Tok",
+				"TokenValue"
+			],
+			[
+				"is",
+				"isAlphabet"
+			],
+			[
+				"End",
+				"endRowCol"
+			],
+			[
+				"begin",
+				"beginRowCol"
+			],
+			[
+				"end",
+				"endRowCol"
+			],
+			[
+				"Tkeni",
+				"TokenizerCursor"
+			],
+			[
+				"Cursor",
+				"CursorResult"
+			],
+			[
+				"sta",
+				"stateFn"
+			],
+			[
 				"ad",
 				"advanceCursor_"
 			],
@@ -28,14 +80,6 @@
 				"Cursor"
 			],
 			[
-				"Tok",
-				"TokenizerCursor"
-			],
-			[
-				"Token",
-				"TokenIdentifier"
-			],
-			[
 				"takeW",
 				"takeWhile"
 			],
@@ -46,14 +90,6 @@
 			[
 				"gl",
 				"glyphList"
-			],
-			[
-				"is",
-				"isGlyph"
-			],
-			[
-				"Tokeni",
-				"TokenizerCursor"
 			],
 			[
 				"bord",
@@ -107,14 +143,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/main.hs",
-			"settings":
-			{
-				"buffer_size": 4331,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -123,10 +151,30 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "ena",
+		"height": 212.0,
+		"last_filter": "to space",
 		"selected_items":
 		[
+			[
+				"to space",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"build",
+				"Build: Cancel"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"has",
+				"Build With: Haskell"
+			],
+			[
+				"tospa",
+				"Indentation: Convert to Spaces"
+			],
 			[
 				"ena",
 				"Package Control: Enable Package"
@@ -142,10 +190,6 @@
 			[
 				"to spaces",
 				"Indentation: Convert to Spaces"
-			],
-			[
-				"insta",
-				"Package Control: Install Package"
 			],
 			[
 				"remo",
@@ -208,7 +252,7 @@
 				"Preferences: Settings - User"
 			]
 		],
-		"width": 449.0
+		"width": 521.0
 	},
 	"console":
 	{
@@ -224,7 +268,7 @@
 		"show_minimap": false,
 		"show_open_files": false,
 		"show_tabs": true,
-		"side_bar_visible": true,
+		"side_bar_visible": false,
 		"status_bar_visible": true
 	},
 	"expanded_folders":
@@ -233,7 +277,12 @@
 	],
 	"file_history":
 	[
+		"/home/bollu/Downloads/GUI-main.py",
 		"/home/bollu/prog/hask-lisp-interp/src/main.hs",
+		"/home/bollu/.config/sublime-text-3/Packages/User/SublimeHaskell.sublime-settings",
+		"/home/bollu/dotfiles/symlink_to_dotfiles.py",
+		"/home/bollu/.config/sublime-text-3/Packages/SublimeHaskell/Settings/SublimeHaskell.sublime-settings",
+		"/home/bollu/prog/statet/src/main.hs",
 		"/home/bollu/prog/cpp-achilles/src/tokenizer.cpp",
 		"/home/bollu/prog/hask-lisp-interp/makefile",
 		"/home/bollu/prog/vispy/vispy/visuals/mesh.py",
@@ -309,7 +358,6 @@
 		"/home/bollu/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/bollu/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/bollu/.config/sublime-text-3/Packages/User/Distraction Free.sublime-settings",
-		"/home/bollu/dotfiles/symlink_to_dotfiles.py",
 		"/home/bollu/prog/vispy/doc/ext/examplesgenerator.py",
 		"/home/bollu/.vimrc",
 		"/home/bollu/prog/vispy/.travis.yml",
@@ -334,6 +382,44 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"label",
+			"setLabel",
+			"MyPanel",
+			"My_App",
+			"wx.App",
+			"My_App",
+			"MainLoop",
+			"My_App",
+			"MainLoop",
+			"My_App",
+			"v",
+			"MyFrame",
+			"tokenizerPeek",
+			"advance",
+			"TokenizerCursor",
+			"Token",
+			"path",
+			"peekTokenizer",
+			"_peekTokenizer",
+			"isNumeric",
+			"TokenizerResult",
+			"TokenizerError",
+			"TokenizerInput",
+			"tokenizerTakeWhile",
+			"_takeWhile",
+			"Range",
+			"R",
+			"Position",
+			"CursorResult",
+			"explore",
+			"max",
+			"ContextValid",
+			"StateVal",
+			"next",
+			"StateT",
+			"AtomId",
+			"=",
+			"Expr",
 			"takeCursorWhile",
 			"advanceCursor",
 			"takeCursorWhile",
@@ -423,45 +509,7 @@
 			"s",
 			"200",
 			"4",
-			"30",
-			"box",
-			".configure",
-			"translucent",
-			"padding",
-			"'translucent'",
-			"(polygon_offset_fill",
-			"polygon_fill",
-			"polygon_fill_state",
-			"set_gl_state",
-			"_set_gl_state",
-			"<<<<<<< HEAD",
-			"HEAD",
-			"he",
-			"HEAD",
-			"polygon_offset_fill",
-			"set_gl_state",
-			"set_state",
-			"polygon_offset",
-			"_outline",
-			"MeshVisual",
-			"5",
-			"cube",
-			"cube_transform",
-			"self",
-			"_outline",
-			"face_colors",
-			"vertex_colors",
-			"0.2",
-			"AffineTransform",
-			"v",
-			".transfor",
-			"#",
-			"##",
-			"        ##",
-			"RegularPolygon",
-			"_mesh",
-			"_outline",
-			"PolygonVisual"
+			"30"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -479,45 +527,14 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/main.hs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4331,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3480,
-								3480
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Haskell/Haskell.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2077.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 24.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -546,15 +563,27 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 118.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
+	},
+	"output.haskell_error_checker":
+	{
+		"height": 167.0
+	},
+	"output.haskell_sublime_load":
+	{
+		"height": 118.0
 	},
 	"pinned_build_system": "",
 	"project": "hask-lisp-interp.sublime-project",
 	"replace":
 	{
-		"height": 44.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -911,6 +940,10 @@
 			[
 				"",
 				"~/subl-projects/vispy.sublime-project"
+			],
+			[
+				"boll",
+				"~/subl-projects/bollu.github.io.sublime-project"
 			]
 		],
 		"width": 380.0

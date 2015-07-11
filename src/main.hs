@@ -1,205 +1,88 @@
-import Control.Monad
-import Control.Applicative
-import Control.Monad.State
-import Data.List
-import Control.Monad.Trans.Except
+-- import Control.Monad.State
+import Data.Monoid
 
--- basic cursor type
-data Cursor i = Cursor {
-    input :: [i]
-}
+type Point = Int
+newtype Region = Region (Point, Point) deriving (Eq, Show)
 
+instance Monoid Region where
+    mempty = Region (0, 0)
+    mappend (Region (begin, _)) (Region(_, end)) = Region (begin, end)
 
-_takeCursorWhile :: (i -> Bool) -> Cursor i -> ([i], Cursor i)
-_takeCursorWhile acceptor cursor = (output, cursor') where
-    output = takeWhile acceptor (input cursor)
-    cursor' = Cursor {
-        input = dropWhile acceptor (input cursor)
-    }  
-
-takeCursorWhile :: (i -> Bool) -> State (Cursor i) [i]
-takeCursorWhile acceptor = state $ \cursor -> (_takeCursorWhile acceptor cursor)
-
-
-peekCursor :: Int -> State (Cursor i) i
-peekCursor 0 = state $ \cursor -> (head (input cursor), cursor)
-peekCursor n = state $  \cursor -> ((input cursor) !! n, cursor)
-
-advanceCursor :: State (Cursor i) i
-advanceCursor = state $ 
-    \cursor -> let cursor' = Cursor (tail (input cursor)) in 
-                (head (input cursor), cursor') 
-
-advanceCursor_ :: State (Cursor i) ()
-advanceCursor_ = state $ 
-    \cursor -> let cursor' = Cursor (tail (input cursor)) in 
-                ((), cursor') 
-
-
-isCursorEmpty :: State (Cursor i) Bool   
-isCursorEmpty = state $ \cursor -> (length (input cursor) == 0, cursor)
-
--- tokenizer cursor, tokenization
-
-type TokenizerCursor = Cursor Char
-
-data Token = 
-    TokenIdentifier String | 
-    TokenNumber String |
-    TokenOpenBracket |
-    TokenCloseBracket |
-    TokenLambda
-    deriving (Eq)
-
-instance Show Token where
-    show (TokenIdentifier str) = "id-" ++ str
-    show (TokenNumber str) = "n-" ++ str
-    show (TokenOpenBracket) = "tok-("
-    show (TokenCloseBracket) = "tok-)"
-    show (TokenLambda) = "tok-lambda"
-
-isWhitespace :: Char -> Bool
-isWhitespace ch = elem ch [' ', '\n', '\t']
-
-isDigit :: Char -> Bool
-isDigit ch = elem ch ['0'..'9']
-
-isLetter :: Char -> Bool
-isLetter ch = elem ch ['a'..'z']
-
-isGlyph :: Char -> Bool
-isGlyph ch = not (isDigit ch || isLetter ch || isWhitespace ch)
-
-takeNumber :: State TokenizerCursor Token
-takeNumber = do 
-    numstr <- takeCursorWhile isDigit
-    return $ TokenNumber numstr
-
-keywordMap = [("lambda", TokenLambda)]
-
-takeIdentifier :: State TokenizerCursor Token
-takeIdentifier = do
-    let isIdentifier = (\c -> isLetter c || isDigit c)
-    idstr <- takeCursorWhile isIdentifier
-
-    let matching_keyword = filter (\(keyword_str, _) -> keyword_str == idstr) keywordMap
-
-    if length matching_keyword == 0
-        then return $ TokenIdentifier idstr 
-        else return $ snd $ head matching_keyword 
-takeWhitespace :: State TokenizerCursor ()
-takeWhitespace = do 
-    _ <- takeCursorWhile isWhitespace
-    return ()
-
-
-
-glyphMap = [("(", TokenOpenBracket),
-            (")", TokenCloseBracket)]
-
-strToGlyph :: String -> (String, Token) 
-strToGlyph str =
-    if length glyphs == 0 
-    then (defaultGlyph, TokenIdentifier defaultGlyph)
-    else (head glyphs)
-    where
-    glyphs =  filter (\(glyph, token) -> glyph == take (length glyph) str) glyphMap 
-    defaultGlyph = takeWhile isGlyph str 
-
-_takeGlyph :: TokenizerCursor -> (Token, TokenizerCursor)
-_takeGlyph cursor = (token, cursor') where
-    (glyphStr, token) = strToGlyph (input cursor)
-    glyphLen = length glyphStr 
-    cursor' = Cursor {
-        input = drop glyphLen (input cursor)
+--Sourced
+data Sourced a = Sourced {
+    val :: a,
+    region :: Region
     }
 
-takeGlyph :: State TokenizerCursor Token
-takeGlyph = state _takeGlyph
+instance Show a => Show (Sourced a) where
+    show Sourced {val=val, region=Region (begin, end)} = "(" ++ (show begin) ++ ":" ++ (show end)  ++ ")" ++ (show val)
+
+instance Functor Sourced where
+    fmap f sourced = Sourced { val=f $ val sourced, region= region sourced}
+
+--Token
+data Token = TokenOpenBracket | TokenCloseBracket | TokenIdentifier String
+
+instance Show Token where
+    show TokenOpenBracket = "("
+    show TokenCloseBracket = ")"
+    show (TokenIdentifier s) = "id-" ++ s
 
 
-sTokenize :: State TokenizerCursor [Token]
-sTokenize = do
-    head <- peekCursor 0
+--Cursor
+data Cursor a = Cursor {
+    stream :: [a],
+    point :: Point
+}
 
-    token <- if (isDigit head)
-        then takeNumber
-        else if (isGlyph head)
-            then takeGlyph
-            else takeIdentifier
+cursorTakewhile :: (a -> Point -> Bool) -> Cursor a -> (Sourced [a], Cursor a)
+cursorTakewhile taker Cursor { stream=stream, point=begin } = (sourcedVal, cursor') where
+    sourcedVal = Sourced { val=headstream, region=Region(begin, end) }
+    cursor' = Cursor {
+        stream = tailstream,
+        point = end
+    }
+    headstream = map fst $ takeWhile (uncurry taker) indexed_stream
+    tailstream = map fst $ dropWhile (uncurry taker) indexed_stream
+    indexed_stream = (zip stream [0..])
+    end = begin + length headstream
 
-    takeWhitespace
-    empty <- isCursorEmpty
+--Tokenizer Code
+type TokenizerCursor = Cursor Char
 
-    rest <- if empty
-                then (return [])
-                else sTokenize
+takeOpenBracket :: [Sourced Token] -> TokenizerCursor -> [Sourced Token]
+takeOpenBracket accum cursor = tokenizeAccum (accum ++ [token]) cursor' where 
+    token = fmap (const TokenOpenBracket) sourcedStr
+    (sourcedStr, cursor') = cursorTakewhile (\_ index -> index == 0) cursor 
 
-    return ([token] ++ rest)
-    
-tokenize :: String -> [Token]
-tokenize input = fst $ runState sTokenize (Cursor input)
+takeCloseBracket :: [Sourced Token] -> TokenizerCursor -> [Sourced Token]
+takeCloseBracket accum cursor = tokenizeAccum (accum ++ [token]) cursor' where 
+    token = fmap (const TokenCloseBracket) sourcedStr
+    (sourcedStr, cursor') = cursorTakewhile (\_ index -> index == 0) cursor 
 
+takeIdentifier :: [Sourced Token] -> TokenizerCursor -> [Sourced Token]
+takeIdentifier accum cursor = tokenizeAccum (accum ++ [token]) cursor' where 
+    token = fmap TokenIdentifier sourcedStr
+    (sourcedStr, cursor') = cursorTakewhile (\c _ -> not $ c `elem` " \n\t()") cursor 
 
---PARSER
+tokenizeAccum :: [Sourced Token] -> TokenizerCursor -> [Sourced Token]
+tokenizeAccum accum cursor @ Cursor { stream=stream, point=point} = 
+    case cleanedStream of
+        "" -> accum
+        '(':_ -> takeOpenBracket accum cleanedCursor  
+        ')':_ -> takeCloseBracket accum cleanedCursor
+        _ -> takeIdentifier accum cleanedCursor
+    where
+        cleanedStream = dropWhile (\c -> c `elem` " \n\t") stream
+        cleanedCursor = Cursor { stream=cleanedStream, point=point }
 
-data AST = Atom Token | Expr [AST] deriving(Show) 
-type ParserCursor = Cursor Token
+tokenize :: String -> [Sourced Token]
+tokenize s = tokenizeAccum [] Cursor { stream=s, point=0 }
+--tokenize :: String -> [Sourced Token]
+--tokenize s = [Sourced {val=TokenIdentifier s, region=mempty}]
 
+main :: IO ()
+main = do
+    input <- getLine
+    print $ tokenize input
 
-collectExpr :: [AST] -> State ParserCursor [AST]
-collectExpr asts = do
-    peek_token <- peekCursor 0
-
-    if peek_token == TokenCloseBracket
-        then do
-            advanceCursor_ --take up the CloseBracket
-            return asts
-        else do
-            peek_ast <- sParse
-            rest_ast <- collectExpr $ asts ++ [peek_ast]
-
-            return rest_ast
-
-parseExpr :: State ParserCursor AST
-parseExpr =  do
-    advanceCursor_ -- take up the branket 
-    inner <- collectExpr []
-
-    return $ Expr inner
-
-parseAtom :: State ParserCursor AST
-parseAtom = do
-    token <- advanceCursor
-    if token == TokenCloseBracket
-        then error "unable to parse atom"
-        else return $ Atom token 
-
-sParse :: State ParserCursor AST
-sParse = do
-    head <- peekCursor 0
-    
-    value <- if head == TokenOpenBracket
-        then parseExpr
-        else parseAtom
-    
-    return value 
-
-parse :: [Token] -> AST
-parse tokens = fst $ runState sParse (Cursor tokens)
-
-
-stringifyAST :: Int -> AST -> String
-stringifyAST indent ast = 
- case ast of
-    Atom (TokenIdentifier id) -> id
-    Atom (TokenNumber n) -> n
-    Atom (other @ _ ) -> (show other)
-
-    Expr inner -> "\n" ++ indent_guide ++ "(" ++ (inner_str inner) ++ ")"
- where
-    indent_guide = replicate (indent * 4) ' '
-    inner_str = \inner -> unwords $ (stringifyAST (indent + 1) <$> inner)
-
---main = putStrLn $ (stringifyAST 0) $ parse $ tokenize "(\\ (* 5 6) (+ 2 22))"
-main = print $ tokenize "(lambda (* 5 6) (+ 2 22))"
