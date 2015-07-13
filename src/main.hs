@@ -29,12 +29,13 @@ instance Functor Sourced where
     fmap f sourced = Sourced { val=f $ val sourced, region=region sourced}
 
 --Token
-data Token = TokenOpenBracket | TokenCloseBracket | TokenIdentifier String
+data Token = TokenOpenBracket | TokenCloseBracket | TokenIdentifier String | TokenString String
 
 instance Show Token where
     show TokenOpenBracket = "("
     show TokenCloseBracket = ")"
     show (TokenIdentifier s) = "tok-" ++ s
+    show (TokenString s) = "\"" ++ s ++ "\""
 
 
 --Cursor
@@ -66,26 +67,32 @@ cursorPeek index Cursor{..} =
      then Left emptyError
      else Right $ stream !! index
 
-cursorTakeWhileAccum :: StreamError e => Sourced [a] -> (a -> Bool) -> Cursor a e -> Either e (Sourced [a], Cursor a e)
-cursorTakeWhileAccum accum taker cursor =
+data TakeWhileType = QuitOnEnd | ErrorOnEnd
+
+cursorTakeWhileAccum :: StreamError e => Sourced [a] -> TakeWhileType -> (a -> Bool) -> Cursor a e -> Either e (Sourced [a], Cursor a e)
+cursorTakeWhileAccum accum takingtype taker cursor =
   if cursorEmpty cursor
-    then return (accum, cursor)
+    then
+      case takingtype of
+      QuitOnEnd -> return (accum, cursor)
+      ErrorOnEnd -> Left emptyError
     else
       do
         peek <- cursorPeek 0 cursor
         if taker peek
           then do
             (current, cursor') <- cursorAdvance 1 cursor
-            cursorTakeWhileAccum (accum <> current) taker cursor' 
+            cursorTakeWhileAccum (accum <> current) takingtype taker cursor' 
           else Right (accum, cursor)
 
-cursorTakeWhile :: StreamError e => (a -> Bool) -> Cursor a e -> Either e (Sourced [a], Cursor a e)
-cursorTakeWhile taker cursor = cursorTakeWhileAccum Sourced {val=[], region=Region(point cursor, point cursor)} taker cursor
+cursorTakeWhile :: StreamError e => TakeWhileType ->  (a -> Bool) -> Cursor a e -> Either e (Sourced [a], Cursor a e)
+cursorTakeWhile takingtype taker cursor = cursorTakeWhileAccum emptyaccum takingtype  taker cursor where
+  emptyaccum = Sourced {val=[], region=Region(point cursor, point cursor)}
 
 --Tokenizer
-data TokenizerError = UnexpectedEOF deriving (Show)
+data TokenizerError = UnexpectedEOF | UnclosedString (Sourced String) deriving (Show)
 instance StreamError TokenizerError where
-  emptyError = UnexpectedEOF
+  emptyError = UnexpectedEOF 
 
 
 tokenizeOpenBracket :: [Sourced Token] -> Cursor Char TokenizerError -> Either TokenizerError [Sourced Token]
@@ -103,27 +110,48 @@ tokenizeCloseBracket accum cursor = do
 tokenizeIdentifier :: [Sourced Token] -> Cursor Char TokenizerError -> Either TokenizerError [Sourced Token]
 tokenizeIdentifier accum cursor =
         do
-          (sourcedStr, cursor') <- cursorTakeWhile (`notElem` "() \n\t") cursor
+          (sourcedStr, cursor') <- cursorTakeWhile QuitOnEnd (`notElem` "() \n\t") cursor
           let sourcedTok = fmap TokenIdentifier sourcedStr
           tokenizeAccum (accum ++ [sourcedTok]) cursor'
-  
+
+tokenizeString :: [Sourced Token] -> Cursor Char TokenizerError -> Either TokenizerError [Sourced Token]
+tokenizeString accum cursor =
+        do
+          (_, cursorNext) <- cursorAdvance 1 cursor--consume the "
+          (sourcedStr, cursor') <- cursorTakeWhile QuitOnEnd (/= '\"') cursorNext
+          
+          if cursorEmpty cursor' 
+            then
+              Left (UnclosedString sourcedStr)    
+            else do  
+              (_, cursorAbsorbed) <- cursorAdvance 1 cursor' --absorb the '\"'
+              let sourcedTok = fmap TokenString sourcedStr
+              tokenizeAccum (accum ++ [sourcedTok]) cursorAbsorbed
+
 
 tokenizeAccum :: [Sourced Token] -> Cursor Char TokenizerError -> Either TokenizerError [Sourced Token]
 tokenizeAccum accum cursor =
   if cursorEmpty cursor
      then Right accum
      else do
-       (_, cursor') <- cursorTakeWhile (`elem` " \n\t") cursor
+       (_, cursor') <- cursorTakeWhile QuitOnEnd (`elem` " \n\t") cursor
        peek <- cursorPeek 0 cursor'
        case peek of
          '(' -> tokenizeOpenBracket accum cursor'
          ')' -> tokenizeCloseBracket accum cursor'
+         '\"' -> tokenizeString accum cursor'
          _ -> tokenizeIdentifier accum cursor'
 
 
 tokenize :: String -> Either TokenizerError [Sourced Token]
 tokenize src = tokenizeAccum [] cursor where
   cursor = Cursor { stream=src, point=0}
+
+--Parser
+--data ParseError = UnbalancedParantheses
+--data AST = List [AST] | AtomId String | AtomInt Int | AtomFloat Double
+
+--parse :: [Sourced Token]  -> [Sourced AST]
 main :: IO ()
 main = do
     input <- getLine
