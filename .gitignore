@@ -2,3 +2,4 @@
 *.swp
 *.hi
 .cabal-sandbox/
+dist/
