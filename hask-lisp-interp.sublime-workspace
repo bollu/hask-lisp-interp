@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"from_",
+				"from_till_end"
+			],
+			[
+				"to_til",
+				"to_till_from"
+			],
+			[
 				"tokeni",
 				"tokenizeAcuum"
 			],
@@ -147,26 +155,8 @@
 			"file": "src/main.hs",
 			"settings":
 			{
-				"buffer_size": 2946,
+				"buffer_size": 9976,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "03:06:07 AM) sure: note that to recall such definition is helping a lot when one is applying some permutation matrix\n(03:06:09 AM) sure: you don't need to compute them\n(03:06:16 AM) sure: just interpret them like that, and the result is trivial\n(03:06:34 AM) sure: multiplying on the right by some permutation will swap columns, while on the left will swap lines",
-			"settings":
-			{
-				"buffer_size": 362,
-				"line_ending": "Unix",
-				"name": "03:06:07 AM) sure: note that to recall such defini"
-			}
-		},
-		{
-			"contents": "(03:53:50 AM) antonfire: You might find it helpful to think of Jordan normal form in terms of directed graphs.\n(03:54:46 AM) antonfire: Basically most of the time you can break a linear system down into a bunch of one-dimensional parts, but sometimes you have a situation where one linear system scales something by, say 2 every step, and so does another one, but also the second one feeds into the first.\n(03:55:47 AM) antonfire: which means the stuff in the first one grows a bit faster than 2^n, more like n 2^n, which means you can't break it down any further.\n(03:57:29 AM) antonfire: By the way, speaking of representation theory, a linear map acting on a vector space is basically a representation of Z, so all the eigenvalue and jordan normal form stuff is a special case of more general representation theory facts.\n(03:58:06 AM) antonfire: And with representations of *finite* groups (or compact groups) you don't have this Jordan normal form complication, everything breaks down more nicely in some sense.\n(03:59:15 AM) antonfire: (A linear map acting on a vector space is also basically an R[x]-module, so all the eigenvalue and jordan normal form stuff is a special case of more general module theory facts. Do you like math yet?)",
-			"settings":
-			{
-				"buffer_size": 1243,
-				"line_ending": "Unix",
-				"name": "(03:53:50 AM) antonfire: You might find it helpful"
 			}
 		}
 	],
@@ -177,10 +167,22 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 212.0,
-		"last_filter": "to space",
+		"height": 392.0,
+		"last_filter": "rein",
 		"selected_items":
 		[
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rien",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"Rein",
+				"Indentation: Reindent Lines"
+			],
 			[
 				"to space",
 				"Indentation: Convert to Spaces"
@@ -262,10 +264,6 @@
 				"Preferences: Key Bindings - Default"
 			],
 			[
-				"rein",
-				"Indentation: Reindent Lines"
-			],
-			[
 				"isnta",
 				"Package Control: Install Package"
 			],
@@ -303,8 +301,11 @@
 	],
 	"file_history":
 	[
-		"/home/bollu/Downloads/GUI-main.py",
+		"/home/bollu/prog/competitive/src/2-dexters-lab.cpp",
+		"/home/bollu/prog/competitive/src/maliks-challenge-01.cpp",
+		"/home/bollu/prog/competitive/inputs/1-makliks-challenge",
 		"/home/bollu/prog/hask-lisp-interp/src/main.hs",
+		"/home/bollu/Downloads/GUI-main.py",
 		"/home/bollu/.config/sublime-text-3/Packages/User/SublimeHaskell.sublime-settings",
 		"/home/bollu/dotfiles/symlink_to_dotfiles.py",
 		"/home/bollu/.config/sublime-text-3/Packages/SublimeHaskell/Settings/SublimeHaskell.sublime-settings",
@@ -392,7 +393,7 @@
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 36.0
 	},
 	"find_in_files":
 	{
@@ -408,6 +409,12 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"first_minus_second",
+			"delta",
+			"to_till_end",
+			"till_from",
+			"Cursor",
+			"data Cursor a e = Cursor {\n",
 			"s",
 			"pos",
 			"label",
@@ -529,13 +536,7 @@
 			"runTokenizerCursor",
 			"@mesh.setter",
 			"mesh",
-			"draw",
-			"CompoundVisual",
-			"_phong",
-			"doc_tr",
-			"self.rotation",
-			"s",
-			"200"
+			"draw"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -553,7 +554,6 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
 				{
@@ -562,81 +562,25 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2946,
+						"buffer_size": 9976,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1295,
+								1295
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/SublimeHaskell/Syntaxes/Haskell-SublimeHaskell.tmLanguage",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 108.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 362,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								362,
-								362
-							]
-						],
-						"settings":
-						{
-							"auto_name": "03:06:07 AM) sure: note that to recall such defini",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1243,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1243,
-								1243
-							]
-						],
-						"settings":
-						{
-							"auto_name": "(03:53:50 AM) antonfire: You might find it helpful",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 276.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -647,7 +591,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 28.0
 	},
 	"input":
 	{
@@ -696,7 +640,7 @@
 	"project": "hask-lisp-interp.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 52.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1052,6 +996,10 @@
 		[
 			[
 				"",
+				"~/subl-projects/vispy.sublime-project"
+			],
+			[
+				"vis",
 				"~/subl-projects/vispy.sublime-project"
 			],
 			[

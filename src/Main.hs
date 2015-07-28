@@ -72,6 +72,11 @@ cursorAdvance cursor = do
   let value = head $ val sourcedListVal
   return (Sourced {val=value, region=region sourcedListVal}, cursor')
 
+cursorAdvanceUnsourced :: StreamError e => Cursor a e -> Either e (a, Cursor a e)
+cursorAdvanceUnsourced cursor = do
+  (sourced, cursor') <- cursorAdvance cursor
+  return (val sourced, cursor')
+
 cursorPeek :: StreamError e => Int -> Cursor a e -> Either e a
 cursorPeek index Cursor{..} =
   if length stream <= index
@@ -97,10 +102,18 @@ cursorTakeWhile :: StreamError e =>  (a -> Bool) -> Cursor a e -> Either e (Sour
 cursorTakeWhile taker cursor = cursorTakeWhileAccum emptyaccum taker cursor where
   emptyaccum = Sourced {val=[], region=Region(point cursor, point cursor)}
 
+
+{-
+cursorTakeWhileUnsourced :: StreamError e =>  (a -> Bool) -> Cursor a e -> Either e ([a], Cursor a e)
+cursorTakeWhileUnsourced taker cursor = do
+  (sourced, cursor') <- (cursorTakeWhile taker cursor)
+  return (val sourced, cursor')
+-}
+
 --Tokenizer
 data TokenizerError = UnexpectedEOF | UnclosedString (Sourced String) deriving (Show)
 instance StreamError TokenizerError where
-  emptyError = UnexpectedEOF 
+  emptyError = UnexpectedEOF
 
 
 tokenizeOpenBracket :: [Sourced Token] -> Cursor Char TokenizerError -> Either TokenizerError [Sourced Token]
@@ -119,12 +132,12 @@ tokenizeIdentifier :: [Sourced Token] -> Cursor Char TokenizerError -> Either To
 tokenizeIdentifier accum cursor =
         do
           (sourcedStr, cursor') <- cursorTakeWhile (`notElem` "() \n\t") cursor
-          let sourcedTok = --check for keywords 
+          let sourcedTok = --check for keywords
                 case val sourcedStr of
                     "true" -> fmap (const (TokenBool True)) sourcedStr
                     "false" -> fmap (const (TokenBool False)) sourcedStr
                     _ -> fmap TokenIdentifier sourcedStr
-      
+
           tokenizeAccum (accum ++ [sourcedTok]) cursor'
 
 tokenizeString :: [Sourced Token] -> Cursor Char TokenizerError -> Either TokenizerError [Sourced Token]
@@ -132,11 +145,11 @@ tokenizeString accum cursor =
         do
           (_, cursorNext) <- cursorAdvance cursor --consume the "
           (sourcedStr, cursor') <- cursorTakeWhile (/= '\"') cursorNext
-          
-          if cursorEmpty cursor' 
+
+          if cursorEmpty cursor'
             then
-              Left (UnclosedString sourcedStr)    
-            else do  
+              Left (UnclosedString sourcedStr)
+            else do
               (_, cursorAbsorbed) <- cursorAdvance cursor' --absorb the '\"'
               let sourcedTok = fmap TokenString sourcedStr
               tokenizeAccum (accum ++ [sourcedTok]) cursorAbsorbed
@@ -146,7 +159,7 @@ tokenizeAccum :: [Sourced Token] -> Cursor Char TokenizerError -> Either Tokeniz
 tokenizeAccum accum cursor =
   do
     (_, cursor') <- cursorTakeWhile (`elem` " \n\t") cursor --cleanup whtespace
-    
+
     if cursorEmpty cursor'
        then return accum
        else do
@@ -171,28 +184,31 @@ instance StreamError ParseError where
 data AST = ASTList [Sourced AST] | AtomId String | AtomInt Int | AtomFloat Double
 
 instance Show AST where
-  show (ASTList l) = "( " ++ foldl  (\a b -> a ++ " " ++ b) "" (map show l) ++ " )" 
-  show (AtomId str) = "atomid-" ++  str
+  show (ASTList l) = "(" ++ foldl  (\a b -> a ++ " " ++ b) "" (map (show . val) l) ++ ")" 
+  show (AtomId str) = "" ++  str
   show (AtomInt int) = show int
   show (AtomFloat float) = show float
 
 type ParseCursor = Cursor (Sourced Token) ParseError
 
-parseListAccum :: [Sourced AST] -> ParseCursor -> Either ParseError ([Sourced AST], ParseCursor)
-parseListAccum accum cursor = do
+parseListAccum :: Sourced Token -> [Sourced AST] -> ParseCursor -> Either ParseError ([Sourced AST], ParseCursor)
+parseListAccum openBracketToken accum cursor =
+  if cursorEmpty cursor then
+    Left $ UnbalancedParantheses openBracketToken
+  else do
   Sourced{val=peek} <- cursorPeek 0 cursor
 
   case peek of
     TokenCloseBracket -> return (accum, cursor)
     _ -> do
       (ast, cursor') <- parseSingle cursor
-      parseListAccum (accum ++ [ast]) cursor'
+      parseListAccum openBracketToken (accum ++ [ast]) cursor'
 
 parseList :: ParseCursor -> Either ParseError (Sourced AST, ParseCursor)
 parseList cursor = do
-  (Sourced{val=tokenBegin}, cursorBegin) <- cursorAdvance cursor
-  (sourcedList, cursorAtCloseBracket) <- parseListAccum [] cursorBegin
-  (Sourced{val=tokenEnd}, cursorEnd) <- cursorAdvance cursorAtCloseBracket
+  (tokenBegin, cursorBegin) <- cursorAdvanceUnsourced cursor
+  (sourcedList, cursorAtCloseBracket) <- parseListAccum tokenBegin [] cursorBegin
+  (tokenEnd, cursorEnd) <- cursorAdvanceUnsourced cursorAtCloseBracket
 
   let totalRegion = region tokenBegin <> region tokenEnd
   
@@ -201,7 +217,7 @@ parseList cursor = do
 
 parseIdentifier :: Cursor (Sourced Token) ParseError -> Either ParseError (Sourced AST, ParseCursor)
 parseIdentifier cursor = do
-  (Sourced{val=idSourcedToken}, cursor') <- cursorAdvance cursor
+  (idSourcedToken, cursor') <- cursorAdvanceUnsourced cursor
   
   case val idSourcedToken of
     TokenIdentifier idStr -> return (atomId, cursor')
@@ -221,7 +237,6 @@ parseSingle cursor =
          TokenCloseBracket -> Left (UnbalancedParantheses sourcedPeek)
          
          _ -> undefined
-       
 
 parseAccum :: [Sourced AST] -> ParseCursor -> Either ParseError [Sourced AST]
 parseAccum accum cursor =
@@ -235,20 +250,35 @@ parse :: [Sourced Token]  -> Either ParseError [Sourced AST]
 parse tokens = parseAccum [] cursor where
   cursor = Cursor { stream=tokens, point=0}
 
+--evaluation
+
+data EvalError = MismatchedType | EmptyList deriving(Show)
+
+
+eval :: AST -> Either EvalError AST
+eval (ASTList []) = Left EmptyList
+
 main :: IO ()
 main = do
     input <- getLine
     let tokensResult = tokenize input
 
     case tokensResult of
-      Right tokens -> (print tokens) >> (putStrLn ("parse:\n" ++ (show $ parse tokens)))
+      Right tokens -> do
+        print tokens
+        let parseResult = parse tokens
+        case parseResult of
+          Right astList ->
+            putStrLn $ "parse:\n" ++ show (map val astList)
+          Left parseError ->
+            putStrLn $ "parse error:\n" ++ show parseError
+
       Left tokenizationError -> putStrLn ("tokenization error:\n" ++ (show tokenizationError)) >> exitFailure
 
-    
+
    --print tokensResult
     --let parseResult =
     --      case tokensResult of
     --        Right tokens -> parse tokens
     --        Left _ -> Right []
-    
     -- print parseResult
