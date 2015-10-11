@@ -4,7 +4,6 @@
 import Data.Monoid
 import Data.Maybe()
 import Text.Read()
-import Control.Monad.State()
 import System.Exit
 
 type Point = Int

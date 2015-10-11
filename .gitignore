@@ -3,3 +3,5 @@
 *.hi
 .cabal-sandbox/
 dist/
+.stack-work/
+.DS_Store
